@@ -7,13 +7,45 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -c .commitlintrc.js -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "eslint -c .eslintrc.js"
+    ],
+    "*.{css,less,scss}": [
+      "stylelint --config .stylelintrc.json"
+    ],
+    "*.{js,json,html,yml,css,less,scss,md}": [
+      "prettier --write"
+    ]
+  },
   "dependencies": {
     "ant-design-vue": "^3.2.7",
     "vue": "^3.2.25",
     "vue-router": "^4.0.16"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
     "@vitejs/plugin-vue": "^2.3.3",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.1.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.1",
+    "prettier": "^2.7.0",
+    "stylelint": "^14.9.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^26.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.5.0",
+    "stylelint-order": "^5.0.0",
+    "stylelint-scss": "^4.2.0",
     "vite": "^2.9.9"
   }
 }
