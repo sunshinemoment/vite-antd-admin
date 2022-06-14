@@ -1,7 +1,7 @@
-import UserLayout from "@/layout/user/index.vue";
+import UserLayout from '@/layout/user';
 
 const route = {
-  path: "/user",
+  path: '/user',
   component: UserLayout,
 };
 

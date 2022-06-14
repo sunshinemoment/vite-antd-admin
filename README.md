@@ -1,7 +1,7 @@
-# Vue 3 + Vite
+# vite-antd-admin
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+## 目录
+- view 应用入口
+- user 登录注册页面
+- pages 应用相关页面
+- details 详情相关页面
