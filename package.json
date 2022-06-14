@@ -5,24 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -c .commitlintrc.js -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "lint-staged": {
-    "*.{js}": [
-      "eslint -c .eslintrc.js"
-    ],
-    "*.{css,less,scss}": [
-      "stylelint --config .stylelintrc.json"
-    ],
-    "*.{js,json,html,yml,css,less,scss,md}": [
-      "prettier --write"
-    ]
+    "preview": "vite preview",
+    "prepare": "husky install"
   },
   "dependencies": {
     "ant-design-vue": "^3.2.7",
