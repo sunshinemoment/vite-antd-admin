@@ -1,14 +1,17 @@
 import View from '@/view';
-import pagesRoute from './pages';
-import detailsRoute from './details';
+import * as ConstantRouteName from '@/constants/route-name';
+
 import userRoute from './user';
+import pagesRoute from './pages';
+import userDetailRoute from './details/user';
 
 const routes = [
   userRoute,
   {
     path: '/',
     component: View,
-    children: [pagesRoute, detailsRoute],
+    name: ConstantRouteName.VIEW,
+    children: [pagesRoute, userDetailRoute],
   },
 ];
 
