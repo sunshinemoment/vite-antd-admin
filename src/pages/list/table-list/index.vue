@@ -1,7 +1,10 @@
 <script setup>
 import { useScreen } from 'vue-screen';
+import { Modal } from 'ant-design-vue';
 import usePaginator from '@/hooks/usePaginator';
-import { getList } from '@/apis/table-list';
+import Add from './add';
+import Detail from './detail';
+import { getList, deleteItem } from '@/apis/table-list';
 
 const columns = [
   {
@@ -80,6 +83,55 @@ const resetForm = () => {
     ...formState,
   });
 };
+
+const toDelete = (record) => {
+  Modal.confirm({
+    title: '提示',
+    content: `确定要删除【${record.name}】吗`,
+    cancelText: '取消',
+    okText: '删除',
+    async onOk() {
+      return await new Promise((resolve, reject) => {
+        deleteItem(record.id)
+          .then(() => {
+            resolve(true);
+            deleteUpdatePage();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    },
+    onCancel() {
+      console.log('Cancel');
+    },
+    class: 'test',
+  });
+};
+
+const deleteUpdatePage = () => {
+  listRun({
+    pageNo: list.value.length === 1 ? current.value - 1 || 1 : current.value,
+    pageSize: pageSize.value,
+    ...formState,
+  });
+};
+
+const addSuccess = () => {
+  listRun({
+    pageNo: 1,
+    pageSize: pageSize.value,
+    ...formState,
+  });
+};
+
+const updateSuccess = () => {
+  listRun({
+    pageNo: current.value,
+    pageSize: pageSize.value,
+    ...formState,
+  });
+};
 </script>
 
 <template>
@@ -109,7 +161,7 @@ const resetForm = () => {
     <!-- 查询列表 -->
     <div class="g-page-list">
       <div class="g-page-actions">
-        <a-button type="primary">添加</a-button>
+        <a-button type="primary" @click="addRef?.show()">添加</a-button>
       </div>
       <a-table
         bordered
@@ -162,4 +214,6 @@ const resetForm = () => {
     </div>
     <!-- /查询列表 -->
   </div>
+  <Add ref="addRef" @add-success="addSuccess" @update-success="updateSuccess"></Add>
+  <Detail ref="detailRef"></Detail>
 </template>
