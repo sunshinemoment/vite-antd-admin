@@ -1,13 +1,36 @@
 <script setup>
+import { useScreen } from 'vue-screen';
 import PageSider from './coms/page-sider.vue';
 import PageHeader from './coms/page-header.vue';
 
+const screen = useScreen();
 const collapsed = ref(false);
+const layoutRef = ref();
 </script>
 
 <template>
-  <a-layout class="layout-page">
-    <a-layout-sider class="layout-page__sider">
+  <a-drawer
+    v-if="screen.portrait"
+    placement="left"
+    :width="200"
+    :visible="collapsed"
+    :closable="false"
+    :getContainer="layoutRef"
+    :bodyStyle="{
+      padding: 0,
+    }"
+    @close="collapsed = false"
+  >
+    <div class="layout-page__sider--m">
+      <PageSider :collapsed="false"></PageSider>
+    </div>
+  </a-drawer>
+  <a-layout class="layout-page" ref="layoutRef">
+    <a-layout-sider
+      v-if="!screen.portrait"
+      v-model:collapsed="collapsed"
+      class="layout-page__sider"
+    >
       <PageSider :collapsed="collapsed"></PageSider>
     </a-layout-sider>
     <a-layout class="layout-page__main">
@@ -24,6 +47,13 @@ const collapsed = ref(false);
 <style lang="scss" scoped>
 .layout-page__sider {
   height: 100vh;
+}
+
+.layout-page__sider--m {
+  position: relative;
+  min-height: 100vh;
+  overflow-y: auto;
+  background: #001529;
 }
 
 .layout-page__main {

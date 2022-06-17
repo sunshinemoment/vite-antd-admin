@@ -1,0 +1,14 @@
+[class^='g-icon-'],
+[class*=' g-icon-'] {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.g-icon-logo {
+  width: 20px;
+  height: 20px;
+  background-image: url('@/assets/images/logo.png');
+  background-size: 100%;
+}

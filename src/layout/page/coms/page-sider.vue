@@ -2,7 +2,6 @@
 import { useRouter, useRoute } from 'vue-router';
 import SubMenu from '@/components/sub-menu';
 import menu from '@/config/menu';
-import * as ConstantRouteName from '@/constants/route-name';
 
 const props = defineProps({
   collapsed: Boolean,
@@ -15,9 +14,7 @@ const matchedRouteKeys = computed(() => {
 const openKeys = ref([...matchedRouteKeys.value]);
 
 function toView() {
-  router.push({
-    name: ConstantRouteName.VIEW,
-  });
+  router.push('/');
 }
 
 function toRoute(item) {
@@ -32,8 +29,10 @@ function toRoute(item) {
 
 <template>
   <div class="page-sider__logo" @click="toView">
-    <h1 v-if="props.collapsed">L</h1>
-    <h1 v-else>LOGO</h1>
+    <h1 v-if="props.collapsed">
+      <img src="@/assets/images/logo.png" alt="logo" />
+    </h1>
+    <h1 v-else><img src="@/assets/images/logo.png" alt="logo" /></h1>
   </div>
   <div class="page-sider__menu">
     <a-menu theme="dark" mode="inline" :selectedKeys="matchedRouteKeys" v-model:openKeys="openKeys">
@@ -66,6 +65,10 @@ function toRoute(item) {
     margin: 0;
     color: #fff;
     font-size: 24px;
+  }
+
+  img {
+    width: 40px;
   }
 }
 </style>

@@ -1,0 +1,182 @@
+@import './utils.scss';
+
+.c-rel {
+  position: relative;
+}
+
+.c-abs {
+  position: absolute;
+}
+
+.c-fixed {
+  position: fixed;
+}
+
+.c-fl {
+  float: left;
+}
+
+.c-fr {
+  float: right;
+}
+
+.c-box {
+  box-sizing: border-box;
+}
+
+.c-mcenter {
+  margin: 0 auto;
+}
+
+.c-text-center {
+  text-align: center;
+}
+
+.c-text-left {
+  text-align: left;
+}
+
+.c-text-right {
+  text-align: right;
+}
+
+.c-abscenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.c-habscenter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.c-vabscenter {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.c-absfill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.c-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.c-word-break {
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.c-clear {
+  clear: both;
+  overflow: hidden;
+  content: '';
+}
+
+.c-clearfix {
+  zoom: 1;
+
+  &::before,
+  &::after {
+    display: table;
+    content: ' ';
+  }
+
+  &::after {
+    clear: both;
+    height: 0;
+    font-size: 0;
+    visibility: hidden;
+  }
+}
+
+.c-flex {
+  display: flex;
+}
+
+.c-justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+.c-justify-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.c-justify-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.c-items-center {
+  display: flex;
+  align-items: center;
+}
+
+.c-flex1 {
+  flex: 1;
+}
+
+.c-flex2 {
+  flex: 2;
+}
+
+.c-flex3 {
+  flex: 3;
+}
+
+.c-flex4 {
+  flex: 4;
+}
+
+.c-flex5 {
+  flex: 5;
+}
+
+.c-flex6 {
+  flex: 6;
+}
+
+.c-flex7 {
+  flex: 7;
+}
+
+.c-flex8 {
+  flex: 8;
+}
+
+.c-mr8 {
+  margin-right: 8px;
+}
+
+.c-line-top {
+  @include u-line(top);
+}
+
+.c-line-right {
+  @include u-line(right);
+}
+
+.c-line,
+.c-line-default,
+.c-line-bottom {
+  @include u-line(bottom);
+}
+
+.c-line-left {
+  @include u-line(left);
+}

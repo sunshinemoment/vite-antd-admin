@@ -1,0 +1,13 @@
+@import './assets/styles/normalize.scss';
+@import './assets/styles/common.scss';
+@import './assets/styles/icon.scss';
+@import './assets/styles/rewrite.scss';
+@import './assets/styles/custom.scss';
+
+html,
+body,
+#app,
+#root {
+  min-height: 100vh;
+  font-size: 16px;
+}

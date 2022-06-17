@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons-vue';
 import { menuMap } from '@/config/menu';
 import uniqBy from 'lodash/uniqBy';
+import { localStore } from '@/utils/store';
 
 const props = defineProps({
   collapsed: {
@@ -32,7 +33,8 @@ const breadcrumbs = computed(() => {
 });
 
 const loginOut = () => {
-  //
+  localStore.clearAll();
+  location.reload();
 };
 </script>
 

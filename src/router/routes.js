@@ -1,5 +1,4 @@
 import View from '@/view';
-import * as ConstantRouteName from '@/constants/route-name';
 
 import userRoute from './user';
 import pagesRoute from './pages';
@@ -10,7 +9,6 @@ const routes = [
   {
     path: '/',
     component: View,
-    name: ConstantRouteName.VIEW,
     children: [pagesRoute, userDetailRoute],
   },
 ];
