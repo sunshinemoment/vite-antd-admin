@@ -21,9 +21,13 @@ const route = {
       path: 'target-list',
       component: RouterHolder,
       name: ConstantRouteName.TARGET_LIST,
+      redirect: {
+        name: ConstantRouteName.TARGET_LIST_LIST,
+      },
       children: [
         {
           path: '',
+          name: ConstantRouteName.TARGET_LIST_LIST,
           component: loadable(() =>
             import(/* webpackChunkName: "target-list" */ '@/pages/list/target-list'),
           ),

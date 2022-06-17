@@ -7,7 +7,11 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 
 const router = useRouter();
 const route = useRoute();
-const { loading: loginLoading, run: loginRun } = useRequest(login, {
+const {
+  loading: loginLoading,
+  run: loginRun,
+  error: loginError,
+} = useRequest(login, {
   manual: true,
 });
 
@@ -17,11 +21,11 @@ const formState = reactive({
 });
 
 async function finish(values) {
-  const [error, res] = await loginRun({
+  const res = await loginRun({
     username: values.username,
     password: values.password,
   });
-  if (error) return;
+  if (loginError.value) return;
   localStore.set('token', res.token);
   if (route.query.redirect) {
     router.push(route.query.redirect);
@@ -62,9 +66,9 @@ const finishFailed = (errorInfo) => {
         </a-input-password>
       </a-form-item>
       <a-form-item>
-        <a-button block type="primary" html-type="submit" :loading="loginLoading"
-          >进入系统</a-button
-        >
+        <a-button block type="primary" html-type="submit" :loading="loginLoading">
+          进入系统
+        </a-button>
       </a-form-item>
     </a-form>
   </div>

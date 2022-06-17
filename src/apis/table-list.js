@@ -81,7 +81,7 @@ export const deleteItem = (id) => {
 export const getItem = (id) => {
   console.log('需要获取的数据');
   console.log(id);
-  return new Promise()((resolve) => {
+  return new Promise((resolve) => {
     const data = {
       id,
       name: '胡彦斌',

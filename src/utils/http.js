@@ -75,7 +75,7 @@ const http = async (options = {}) => {
       data,
       params,
     });
-    return [null, res];
+    return res;
   } catch (error) {
     message.error(error.message);
     if (error.code === UNAUTHORIZED) {
@@ -84,7 +84,9 @@ const http = async (options = {}) => {
         location.reload();
       }, 3000);
     }
-    return [error, null];
+    // throw new Error(error);
+    Promise.reject(error);
+    // return [error, null];
   }
 };
 
