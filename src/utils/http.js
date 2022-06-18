@@ -39,55 +39,67 @@ axiosInstance.interceptors.response.use(
     if (data.code === SUCCESS) {
       return data.data;
     }
+    message.error(data.message);
+    if (data.code === UNAUTHORIZED) {
+      localStore.clearAll();
+      setTimeout(() => {
+        location.reload();
+      }, 3000);
+      return Promise.reject({
+        code: data.code,
+        message: data.message,
+      });
+    }
     return Promise.reject({
       code: data.code,
       message: data.message,
     });
   },
   ({ response, ...responseData }) => {
-    if (!response) {
-      return Promise.reject({
-        code: responseData.code,
-        message: responseData.message,
-      });
-    }
-    if (response.data) {
-      return Promise.reject({
-        code: response.data.code,
-        message: response.data.message || 'server error',
-      });
-    }
-    return Promise.reject({
+    let errorData = {
       code: response.status,
       message: response.statusText || 'server error',
-    });
+    };
+    if (!response) {
+      // 超时或者其他不知名情况下会进入这里
+      errorData = {
+        code: responseData.code,
+        message: responseData.message,
+      };
+    } else if (response.data) {
+      errorData = {
+        code: response.data.code,
+        message: response.data.message || 'server error',
+      };
+    }
+    return Promise.reject(errorData);
   },
 );
 
-const http = async (options = {}) => {
-  const { headers = {}, method = 'GET', url = '/', data, params } = options;
+const http = async ({ headers = {}, method = 'GET', url = '/', data, params } = {}) => {
+  return await axiosInstance.request({
+    method,
+    url,
+    headers,
+    data,
+    params,
+  });
+};
 
-  try {
-    const res = await axiosInstance.request({
-      method,
-      url,
-      headers,
-      data,
-      params,
-    });
-    return res;
-  } catch (error) {
-    message.error(error.message);
-    if (error.code === UNAUTHORIZED) {
-      localStore.clearAll();
-      setTimeout(() => {
-        location.reload();
-      }, 3000);
-    }
-    // throw new Error(error);
-    Promise.reject(error);
-    // return [error, null];
-  }
+export const get = async (url, params, config) => {
+  return await http({ url, method: 'GET', params, ...config });
+};
+
+export const post = async (url, data, config) => {
+  return await http({ url, method: 'POST', data, ...config });
+};
+
+export const del = async (url, params, config) => {
+  return await http({ url, method: 'delete', params, ...config });
+};
+
+export const put = async (url, data, config) => {
+  return await http({ url, method: 'put', data, ...config });
 };
 
 export default http;
