@@ -26,7 +26,7 @@ async function finish(values) {
     password: values.password,
   });
   if (loginError.value) return;
-  localStore.set('token', res.authorization);
+  localStore.set('token', res.token);
   if (route.query.redirect) {
     router.push(route.query.redirect);
     return;

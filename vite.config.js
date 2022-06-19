@@ -16,6 +16,14 @@ export default defineConfig(({ mode, command }) => {
       },
       extensions: ['.js', '.json', '.ts', '.vue'], //
     },
+    css: {
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
+        },
+        scss: { additionalData: `@import '@/assets/styles/variable.scss';` },
+      },
+    },
     server: {
       open: true, // 服务启动时是否自动打开浏览器
       cors: true, // 允许跨域
