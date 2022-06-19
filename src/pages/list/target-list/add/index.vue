@@ -22,10 +22,6 @@ const {
   run: getItemRun,
   data: itemData,
 } = useRequest(getItem, {
-  formatResult([error, res]) {
-    if (error) return null;
-    return res;
-  },
   manual: true,
 });
 const {
@@ -97,7 +93,7 @@ const cancel = () => {
 
 <template>
   <div class="g-page g-page-form--small page-list-add">
-    <a-spin :spinning="itemLoading">
+    <a-card :loading="itemLoading" :border="false">
       <a-form :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }" ref="formRef" :model="formState">
         <a-form-item label="姓名" name="name" :rules="[{ required: true, message: '请输入姓名' }]">
           <a-input v-model:value="formState.name" placeholder="请输入"></a-input>
@@ -126,6 +122,6 @@ const cancel = () => {
           </a-space>
         </a-form-item>
       </a-form>
-    </a-spin>
+    </a-card>
   </div>
 </template>

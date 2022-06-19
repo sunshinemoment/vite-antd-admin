@@ -51,7 +51,7 @@ export const addItem = (data) => {
   console.log(data);
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve([null, true]);
+      resolve(true);
     }, 500);
   });
 };
@@ -61,9 +61,7 @@ export const updateItem = (data) => {
   console.log(data);
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve({
-        data: true,
-      });
+      resolve(true);
     }, 500);
   });
 };
@@ -73,7 +71,7 @@ export const deleteItem = (id) => {
   console.log(id);
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve([null, true]);
+      resolve(true);
     }, 500);
   });
 };
@@ -89,7 +87,7 @@ export const getItem = (id) => {
       address: '西湖区湖底公园1号',
     };
     setTimeout(() => {
-      resolve([null, data]);
+      resolve(data);
     }, 500);
   });
 };
