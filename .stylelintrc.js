@@ -47,5 +47,5 @@ module.exports = {
       customSyntax: 'postcss-scss',
     },
   ],
-  ignoreFiles: ['node_modules/**/*', 'dist/**/*', '**/typings/**/*'],
+  ignoreFiles: ['node_modules/**/*', 'dist/**/*'],
 };

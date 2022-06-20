@@ -42,7 +42,7 @@ function toRoute(item) {
             <template v-if="item.icon" #icon>
               <component :is="item.icon"></component>
             </template>
-            {{ item.title }}{{ item.icon }}
+            {{ item.title }}
           </a-menu-item>
         </template>
         <template v-else>

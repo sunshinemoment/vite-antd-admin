@@ -33,6 +33,11 @@ const menu = [
       },
     ],
   },
+  {
+    title: ConstantRouteLabel.SETTING,
+    key: ConstantRouteName.SETTING,
+    icon: TableOutlined,
+  },
 ];
 
 export const menuMap = treeToMap(menu);

@@ -1,7 +1,8 @@
 import PageLayout from '@/layout/page';
 import * as ConstantRouteName from '@/constants/route-name';
 
-import pageListRoute from './list';
+import listRoute from './list';
+import settingRoute from './setting';
 
 const route = {
   path: '',
@@ -9,7 +10,7 @@ const route = {
   redirect: {
     name: ConstantRouteName.LIST,
   },
-  children: [pageListRoute],
+  children: [listRoute, settingRoute],
 };
 
 export default route;

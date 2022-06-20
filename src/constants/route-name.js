@@ -14,3 +14,5 @@ export const TARGET_LIST_UPDATE = 'target-list-update';
 export const TARGET_LIST_DETAIL = 'target-list-detail';
 
 export const DETAIL_USER = 'detail-user';
+
+export const SETTING = 'setting';
