@@ -6,6 +6,7 @@ import {
   CaretDownFilled,
   UserOutlined,
 } from '@ant-design/icons-vue';
+import { useScreen } from 'vue-screen';
 import { menuMap } from '@/config/menu';
 import uniqBy from 'lodash/uniqBy';
 import { localStore } from '@/utils/store';
@@ -18,6 +19,7 @@ const props = defineProps({
   },
 });
 
+const screen = useScreen();
 const emits = defineEmits(['toggleCollapsed']);
 const route = useRoute();
 const router = useRouter();
@@ -54,7 +56,7 @@ const toSetting = () => {
       <MenuUnfoldOutlined v-if="props.collapsed"></MenuUnfoldOutlined>
       <MenuFoldOutlined v-else></MenuFoldOutlined>
     </a-button>
-    <a-breadcrumb>
+    <a-breadcrumb v-if="screen.landscape">
       <a-breadcrumb-item v-for="(item, i) in breadcrumbs" :key="item">
         <router-link v-if="i !== breadcrumbs.length - 1" :to="{ name: item.key }">
           {{ item.title }}
