@@ -1,5 +1,5 @@
 <script setup>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -9,6 +9,7 @@ import {
 import { menuMap } from '@/config/menu';
 import uniqBy from 'lodash/uniqBy';
 import { localStore } from '@/utils/store';
+import * as ConstantRouteName from '@/constants/route-name';
 
 const props = defineProps({
   collapsed: {
@@ -19,15 +20,18 @@ const props = defineProps({
 
 const emits = defineEmits(['toggleCollapsed']);
 const route = useRoute();
+const router = useRouter();
 const breadcrumbs = computed(() => {
   const matched = route.matched.slice(1);
-  const matchedItems = uniqBy(matched, 'path').map((item) => {
-    const currentMenu = menuMap[item.name] || {};
-    return {
-      key: currentMenu.key,
-      title: currentMenu.title,
-    };
-  });
+  const matchedItems = uniqBy(matched, 'path')
+    .filter((item) => item.name)
+    .map((item) => {
+      const currentMenu = menuMap[item.name] || {};
+      return {
+        key: currentMenu.key,
+        title: currentMenu.title,
+      };
+    });
 
   return matchedItems;
 });
@@ -35,6 +39,12 @@ const breadcrumbs = computed(() => {
 const loginOut = () => {
   localStore.clearAll();
   location.reload();
+};
+
+const toSetting = () => {
+  router.push({
+    name: ConstantRouteName.SETTING,
+  });
 };
 </script>
 
@@ -57,6 +67,7 @@ const loginOut = () => {
     <a-popover placement="bottomRight">
       <template #content>
         <a-space direction="vertical" size="small" style="display: flex" class="header__actions">
+          <a-button type="text" block @click="toSetting">设置中心</a-button>
           <a-button type="text" block @click="loginOut">退出登录</a-button>
         </a-space>
       </template>
