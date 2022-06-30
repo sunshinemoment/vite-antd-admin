@@ -17,7 +17,7 @@ const screen = useScreen();
       <img src="@/assets/images/top-bg.jpg" alt="cover" />
     </div>
     <div class="layout-user__inner">
-      <h1>YOLOLIV OMS 管理系统</h1>
+      <h1>XXX模板 管理系统</h1>
       <div class="layout-user__main">
         <router-view></router-view>
       </div>

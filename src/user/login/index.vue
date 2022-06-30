@@ -46,7 +46,7 @@ const finishFailed = (errorInfo) => {
       <b>Login User</b>
     </div>
     <a-divider>
-      <span class="login-desc">欢迎登录OMS管理系统</span>
+      <span class="login-desc">欢迎登录 XXX模板 管理系统</span>
     </a-divider>
     <a-form
       @finish="finish"
