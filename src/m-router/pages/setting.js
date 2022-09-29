@@ -4,7 +4,7 @@ import * as ConstantRouteName from '@/constants/route-name';
 const route = {
   path: 'setting',
   name: ConstantRouteName.SETTING,
-  component: loadable(() => import(/* webpackChunkName: "setting" */ '@/pages/setting')),
+  component: loadable(() => import(/* webpackChunkName: "setting" */ '@/m-pages/setting')),
 };
 
 export default route;

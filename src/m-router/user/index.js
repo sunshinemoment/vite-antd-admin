@@ -1,7 +1,7 @@
 import loadable from '@/utils/loadable';
 import * as ConstantRouteName from '@/constants/route-name';
 
-import UserLayout from '@/layout/user';
+import UserLayout from '@/p-layout/user';
 
 const route = {
   path: '/user',

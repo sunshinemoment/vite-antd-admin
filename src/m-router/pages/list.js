@@ -14,7 +14,7 @@ const route = {
       path: 'table-list',
       name: ConstantRouteName.TABLE_LIST,
       component: loadable(() =>
-        import(/* webpackChunkName: "table-list" */ '@/pages/list/table-list'),
+        import(/* webpackChunkName: "table-list" */ '@/m-pages/list/table-list'),
       ),
     },
     {
@@ -29,28 +29,28 @@ const route = {
           path: '',
           name: ConstantRouteName.TARGET_LIST_LIST,
           component: loadable(() =>
-            import(/* webpackChunkName: "target-list" */ '@/pages/list/target-list'),
+            import(/* webpackChunkName: "target-list" */ '@/m-pages/list/target-list'),
           ),
         },
         {
           path: 'add',
           name: ConstantRouteName.TARGET_LIST_ADD,
           component: loadable(() =>
-            import(/* webpackChunkName: "target-list" */ '@/pages/list/target-list/add'),
+            import(/* webpackChunkName: "target-list" */ '@/m-pages/list/target-list/add'),
           ),
         },
         {
           path: 'update/:id',
           name: ConstantRouteName.TARGET_LIST_UPDATE,
           component: loadable(() =>
-            import(/* webpackChunkName: "target-list" */ '@/pages/list/target-list/add'),
+            import(/* webpackChunkName: "target-list" */ '@/m-pages/list/target-list/add'),
           ),
         },
         {
           path: 'detail/:id',
           name: ConstantRouteName.TARGET_LIST_DETAIL,
           component: loadable(() =>
-            import(/* webpackChunkName: "target-list" */ '@/pages/list/target-list/detail'),
+            import(/* webpackChunkName: "target-list" */ '@/m-pages/list/target-list/detail'),
           ),
         },
       ],

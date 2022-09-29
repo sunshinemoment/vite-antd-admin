@@ -1,4 +1,4 @@
-import PageLayout from '@/layout/page';
+import PageLayout from '@/p-layout/page';
 import * as ConstantRouteName from '@/constants/route-name';
 
 import listRoute from './list';
