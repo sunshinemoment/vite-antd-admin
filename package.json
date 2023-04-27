@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
+    "@logicflow/core": "^1.2.3",
+    "@logicflow/extension": "^1.2.3",
     "ant-design-vue": "^3.2.7",
     "axios": "^0.27.2",
     "lodash": "^4.17.21",

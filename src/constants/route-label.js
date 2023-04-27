@@ -7,4 +7,6 @@ export const TARGET_LIST_ADD = '添加数据';
 export const TARGET_LIST_UPDATE = '编辑数据';
 export const TARGET_LIST_DETAIL = '详情';
 
+export const LOGIC_FLOW = '流程图';
+
 export const SETTING = '设置中心';

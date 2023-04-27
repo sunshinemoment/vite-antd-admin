@@ -34,6 +34,11 @@ const menu = [
     ],
   },
   {
+    title: ConstantRouteLabel.LOGIC_FLOW,
+    key: ConstantRouteName.LOGIC_FLOW,
+    icon: TableOutlined,
+  },
+  {
     title: ConstantRouteLabel.SETTING,
     key: ConstantRouteName.SETTING,
     icon: TableOutlined,

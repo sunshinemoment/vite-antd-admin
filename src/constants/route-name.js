@@ -15,4 +15,6 @@ export const TARGET_LIST_DETAIL = 'target-list-detail';
 
 export const DETAIL_USER = 'detail-user';
 
+export const LOGIC_FLOW = 'logic-flow';
+
 export const SETTING = 'setting';
