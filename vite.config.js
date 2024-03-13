@@ -27,6 +27,7 @@ export default defineConfig(({ mode, command }) => {
     server: {
       open: true, // 服务启动时是否自动打开浏览器
       cors: true, // 允许跨域
+      port: 1234,
       proxy: {
         '/api': {
           target: process.env.VITE_BASEURL,

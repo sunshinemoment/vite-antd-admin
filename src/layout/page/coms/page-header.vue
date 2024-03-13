@@ -98,10 +98,8 @@ const toSetting = () => {
 .header__actions {
   width: 120px;
 
-  :deep {
-    .ant-btn {
-      text-align: left;
-    }
+  :deep(.ant-btn) {
+    text-align: left;
   }
 }
 

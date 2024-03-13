@@ -36,10 +36,8 @@ const back = () => {
 
 <style lang="scss" scoped>
 .page-list-detail {
-  :deep {
-    .ant-page-header {
-      background: #fff;
-    }
+  :deep(.ant-page-header) {
+    background: #fff;
   }
 }
 </style>
