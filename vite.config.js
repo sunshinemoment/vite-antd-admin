@@ -15,7 +15,7 @@ export default defineConfig(({ mode, command }) => {
       vueJsx(),
       AutoImport({
         eslintrc: {
-          enabled: true,
+          enabled: false,
           globalsPropValue: true,
         },
         imports: ['vue', 'vue-router', 'pinia'],
