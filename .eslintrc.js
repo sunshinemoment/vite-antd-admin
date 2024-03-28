@@ -4,7 +4,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['eslint:recommended', 'plugin:vue/essential', 'prettier', 'vue-global-api'],
+  extends: [
+    'eslint:recommended',
+    'plugin:vue/essential',
+    'prettier',
+    './.eslintrc-auto-import.json',
+  ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -14,5 +19,5 @@ module.exports = {
     'vue/multi-word-component-names': 0,
     'vue/no-multiple-template-root': 0,
     'vue/no-v-model-argument': 0,
-  },
+  }
 };

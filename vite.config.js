@@ -1,5 +1,6 @@
-import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { defineConfig } from 'vite';
+import AutoImport from 'unplugin-auto-import/vite';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { resolve } from 'path';
 
@@ -9,7 +10,17 @@ export default defineConfig(({ mode, command }) => {
   const isDEV = command === 'serve';
   return {
     base: isDEV ? '/' : '/',
-    plugins: [vue(), vueJsx()],
+    plugins: [
+      vue(),
+      vueJsx(),
+      AutoImport({
+        eslintrc: {
+          enabled: true,
+          globalsPropValue: true,
+        },
+        imports: ['vue', 'vue-router', 'pinia'],
+      }),
+    ],
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src'), // 路径别名
