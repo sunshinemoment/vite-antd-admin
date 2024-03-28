@@ -11,8 +11,7 @@
     "build:test": "vite build --mode test",
     "build:pre": "vite build --mode pre",
     "build": "vite build --mode production",
-    "preview": "vite preview",
-    "prepare": "husky install"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
