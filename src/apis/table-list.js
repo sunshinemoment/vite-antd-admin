@@ -1,34 +1,36 @@
+function getRandom() {
+  return Math.random().toString(36).slice(-8);
+}
+
 export const getList = (query) => {
-  console.log('查询参数');
-  console.log(query);
   const data = {
     list: [
       {
-        id: '1',
+        id: getRandom(),
         name: '胡彦斌',
         age: 32,
         address: '西湖区湖底公园1号',
       },
       {
-        id: '2',
+        id: getRandom(),
         name: '胡彦祖',
         age: 42,
         address: '西湖区湖底公园1号',
       },
       {
-        id: '3',
+        id: getRandom(),
         name: '刘德华',
         age: 42,
         address: '西湖区湖底公园1号',
       },
       {
-        id: '4',
+        id: getRandom(),
         name: '李连杰',
         age: 42,
         address: '西湖区湖底公园1号',
       },
       {
-        id: '5',
+        id: getRandom(),
         name: '成龙',
         age: 42,
         address: '西湖区湖底公园1号',

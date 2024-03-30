@@ -8,6 +8,11 @@ import { getList, deleteItem } from '@/apis/table-list';
 
 const columns = [
   {
+    title: 'Id',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
     title: '姓名',
     dataIndex: 'name',
     key: 'name',
@@ -133,6 +138,10 @@ const updateSuccess = () => {
     ...formState,
   });
 };
+
+onMounted(() => {
+  console.log('table-list');
+});
 </script>
 
 <template>

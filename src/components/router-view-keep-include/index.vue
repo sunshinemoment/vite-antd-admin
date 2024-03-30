@@ -1,10 +1,12 @@
 <script setup>
-import * as ConstantRouteName from '@/constants/route-name';
+import useRouteCache from '@/hooks/useRouteCache';
+
+const { caches } = useRouteCache();
 </script>
 
 <template>
   <router-view v-slot="{ Component }">
-    <keep-alive :exclude="[ConstantRouteName.TABLE_LIST]">
+    <keep-alive :include="caches">
       <component :is="Component" />
     </keep-alive>
   </router-view>

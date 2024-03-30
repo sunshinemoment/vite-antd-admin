@@ -2,10 +2,16 @@
 import { useScreen } from 'vue-screen';
 import PageSider from './coms/page-sider.vue';
 import PageHeader from './coms/page-header.vue';
+import PageTabs from './coms/page-tabs.vue';
+import RouterViewKeepInclude from '@/components/router-view-keep-include';
+import useRouteCache from '@/hooks/useRouteCache';
 
+const { collectCaches } = useRouteCache();
 const screen = useScreen();
 const collapsed = ref(false);
 const layoutRef = ref();
+
+collectCaches();
 </script>
 
 <template>
@@ -38,7 +44,8 @@ const layoutRef = ref();
         <PageHeader @toggleCollapsed="collapsed = !collapsed" :collapsed="collapsed"></PageHeader>
       </a-layout-header>
       <a-layout-content class="layout-page__content">
-        <router-view></router-view>
+        <PageTabs></PageTabs>
+        <RouterViewKeepInclude></RouterViewKeepInclude>
       </a-layout-content>
     </a-layout>
   </a-layout>

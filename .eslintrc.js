@@ -5,6 +5,7 @@ module.exports = {
     es2021: true,
   },
   extends: [
+    'plugin:vue/base',
     'eslint:recommended',
     'plugin:vue/essential',
     'prettier',
@@ -13,6 +14,9 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
   plugins: ['vue'],
   rules: {
@@ -21,6 +25,6 @@ module.exports = {
     'vue/no-v-model-argument': 0,
   },
   globals: {
-    defineOptions: true
-  }
+    defineOptions: true,
+  },
 };

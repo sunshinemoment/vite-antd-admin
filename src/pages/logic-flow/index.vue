@@ -16,6 +16,10 @@ function initLogicFlow() {
 
   lf.render();
 }
+
+onMounted(() => {
+  console.log('logic-flow');
+});
 </script>
 
 <template>

@@ -5,8 +5,14 @@ import { useScreen } from 'vue-screen';
 import usePaginator from '@/hooks/usePaginator';
 import { getList, deleteItem } from '@/apis/table-list';
 import * as ConstantRouteName from '@/constants/route-name';
+import useParamIdPath from '@/hooks/useParamIdPath';
 
 const columns = [
+  {
+    title: 'Id',
+    dataIndex: 'id',
+    key: 'id',
+  },
   {
     title: '姓名',
     dataIndex: 'name',
@@ -36,6 +42,7 @@ const formState = reactive({
   data2: '',
 });
 const formRef = ref();
+const getPathByParamId = useParamIdPath();
 
 const {
   list,
@@ -92,12 +99,7 @@ const toAdd = () => {
 };
 
 const toDetail = (record) => {
-  router.push({
-    name: ConstantRouteName.TARGET_LIST_DETAIL,
-    params: {
-      id: record.id,
-    },
-  });
+  router.push(getPathByParamId(ConstantRouteName.TARGET_LIST_DETAIL, record.id));
 };
 
 const toUpdate = (record) => {
@@ -141,6 +143,10 @@ const deleteUpdatePage = () => {
     ...formState,
   });
 };
+
+onMounted(() => {
+  console.log('target-list');
+});
 </script>
 
 <template>
