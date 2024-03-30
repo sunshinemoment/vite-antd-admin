@@ -33,7 +33,7 @@ const route = {
         name: ConstantRouteName.TARGET_LIST_LIST,
       },
       meta: {
-        keepAlive: false,
+        keepAlive: true,
       },
       children: [
         {
@@ -42,6 +42,9 @@ const route = {
           component: customRouteWidthName(ConstantRouteName.TARGET_LIST_LIST, () =>
             import(/* webpackChunkName: "target-list" */ '@/pages/list/target-list'),
           ),
+          meta: {
+            keepAlive: true,
+          },
         },
         {
           path: 'add',
@@ -61,12 +64,18 @@ const route = {
           path: 'detail',
           name: ConstantRouteName.TARGET_LIST_DETAIL,
           component: routerViewKeepDynamic,
+          meta: {
+            keepAlive: true,
+          },
           children: [
             {
               path: ':id',
               component: loadable(() =>
                 import(/* webpackChunkName: "target-list" */ '@/pages/list/target-list/detail'),
               ),
+              meta: {
+                keepAlive: true,
+              },
             },
           ],
         },

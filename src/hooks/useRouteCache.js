@@ -12,6 +12,18 @@ export default function useRouteCache() {
     caches.value.push(componentName);
   }
 
+  function removeCache(componentName) {
+    if (Array.isArray(componentName)) {
+      componentName.forEach(removeCache);
+      return;
+    }
+
+    const index = caches.value.indexOf(componentName);
+    if (index >= 0) {
+      return caches.value.splice(index, 1);
+    }
+  }
+
   function collectRouteCaches() {
     route.matched.forEach((routeMatch) => {
       const componentDef = routeMatch.components?.default;
@@ -29,6 +41,8 @@ export default function useRouteCache() {
 
   return {
     caches,
+    addCache,
+    removeCache,
     collectCaches,
   };
 }
