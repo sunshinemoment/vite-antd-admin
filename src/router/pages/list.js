@@ -1,6 +1,6 @@
 import loadable from '@/utils/loadable';
 import { customRouterViewKeepIncludeWidthName } from '@/components/router-view-keep-include/helper';
-import routerViewKeepDynamic from '@/components/router-view-keep-dynamic';
+import { customRouterViewKeepDynamicWidthName } from '@/components/router-view-keep-dynamic/helper';
 import * as ConstantRouteName from '@/constants/route-name';
 import customRouteWidthName from '@/utils/customRouteWidthName';
 
@@ -63,7 +63,7 @@ const route = {
         {
           path: 'detail',
           name: ConstantRouteName.TARGET_LIST_DETAIL,
-          component: routerViewKeepDynamic,
+          component: customRouterViewKeepDynamicWidthName(ConstantRouteName.TARGET_LIST_DETAIL),
           meta: {
             keepAlive: true,
           },

@@ -11,6 +11,10 @@ const { loading: itemLoading, data: itemData } = useRequest(getItem, {
   defaultParams: [id],
 });
 
+onMounted(() => {
+  console.log('detail');
+});
+
 const back = () => {
   router.push({
     name: ConstantRouteName.TARGET_LIST,

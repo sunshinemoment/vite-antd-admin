@@ -25,6 +25,11 @@ export default function useRouteCache() {
   }
 
   function collectRouteCaches() {
+    /** 动态路由缓存 */
+    if (Object.keys(route.params) && route.meta?.keepAlive) {
+      addCache(route.fullPath);
+    }
+
     route.matched.forEach((routeMatch) => {
       const componentDef = routeMatch.components?.default;
       const componentName = componentDef?.name;

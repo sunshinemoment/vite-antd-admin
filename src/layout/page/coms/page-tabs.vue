@@ -3,7 +3,7 @@ import { menuMap } from '@/config/menu';
 import { Loading3QuartersOutlined, CloseCircleOutlined } from '@ant-design/icons-vue';
 import useRouteCache from '@/hooks/useRouteCache';
 
-const { removeCache, caches } = useRouteCache();
+const { removeCache } = useRouteCache();
 const route = useRoute();
 const router = useRouter();
 const tabs = ref([]);
@@ -68,7 +68,6 @@ watch(() => route.path, changeTabs, {
 
 <template>
   <div class="page-tabs">
-    {{ caches }}
     <a-tabs v-model:activeKey="activeKey" type="card" @change="tabChange">
       <a-tab-pane v-for="tab in tabs" :key="tab.fullPath">
         <template #tab>
