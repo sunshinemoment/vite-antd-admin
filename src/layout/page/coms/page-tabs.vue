@@ -3,7 +3,7 @@ import { menuMap } from '@/config/menu';
 import { Loading3QuartersOutlined, CloseCircleOutlined } from '@ant-design/icons-vue';
 import useRouteCache from '@/hooks/useRouteCache';
 
-const { removeCache } = useRouteCache();
+const { removeCache, refresh: refreshTab } = useRouteCache();
 const route = useRoute();
 const router = useRouter();
 const tabs = ref([]);
@@ -25,13 +25,28 @@ function changeTabs() {
 
   const tab = {
     ...route,
-    label: menuMap[route.name]?.title || route.fullPath,
+    label: route.params.id || menuMap[route.name]?.title || route.fullPath,
     componentName: componentDef?.name || route.name,
   };
 
   activeKey.value = tab.fullPath;
 
   tabs.value.push(tab);
+}
+
+function refresh(fullPath) {
+  if (fullPath !== activeKey.value) return;
+
+  const currentTab = tabs.value.find((tab) => tab.fullPath === fullPath);
+
+  if (!currentTab) return;
+
+  if (Object.keys(currentTab.params).length) {
+    refreshTab(currentTab.fullPath);
+    return;
+  }
+
+  refreshTab(currentTab.componentName);
 }
 
 function remove(fullPath) {
@@ -74,6 +89,7 @@ watch(() => route.path, changeTabs, {
           <div class="page-tab">
             <Loading3QuartersOutlined
               class="page-tab__icon page-tab__refresh"
+              @click.stop="refresh(tab.fullPath)"
             ></Loading3QuartersOutlined>
             <span>{{ tab.label }}</span>
             <CloseCircleOutlined

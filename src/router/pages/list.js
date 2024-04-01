@@ -37,6 +37,7 @@ const route = {
       },
       children: [
         {
+          /** 静态态路由使用缓存示例 */
           path: '',
           name: ConstantRouteName.TARGET_LIST_LIST,
           component: customRouteWidthName(ConstantRouteName.TARGET_LIST_LIST, () =>
@@ -47,20 +48,26 @@ const route = {
           },
         },
         {
+          /** 静态态路由使用缓存示例 */
           path: 'add',
           name: ConstantRouteName.TARGET_LIST_ADD,
           component: customRouteWidthName(ConstantRouteName.TARGET_LIST_ADD, () =>
             import(/* webpackChunkName: "target-list" */ '@/pages/list/target-list/add'),
           ),
+          meta: {
+            keepAlive: true,
+          },
         },
         {
+          /** 动态路由不使用缓存示例 */
           path: 'update/:id',
           name: ConstantRouteName.TARGET_LIST_UPDATE,
-          component: customRouteWidthName(ConstantRouteName.TARGET_LIST_UPDATE, () =>
+          component: loadable(() =>
             import(/* webpackChunkName: "target-list" */ '@/pages/list/target-list/add'),
           ),
         },
         {
+          /** 动态路由使用缓存示例 */
           path: 'detail',
           name: ConstantRouteName.TARGET_LIST_DETAIL,
           component: customRouterViewKeepDynamicWidthName(ConstantRouteName.TARGET_LIST_DETAIL),

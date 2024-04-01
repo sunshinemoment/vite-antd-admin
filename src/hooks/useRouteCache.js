@@ -1,4 +1,5 @@
 const caches = ref([]);
+const render = ref({});
 
 export default function useRouteCache() {
   const route = useRoute();
@@ -10,6 +11,7 @@ export default function useRouteCache() {
     }
     if (caches.value.includes(componentName)) return;
     caches.value.push(componentName);
+    render.value[componentName] = true;
   }
 
   function removeCache(componentName) {
@@ -26,7 +28,7 @@ export default function useRouteCache() {
 
   function collectRouteCaches() {
     /** 动态路由缓存 */
-    if (Object.keys(route.params) && route.meta?.keepAlive) {
+    if (Object.keys(route.params).length && route.meta?.keepAlive) {
       addCache(route.fullPath);
     }
 
@@ -44,10 +46,19 @@ export default function useRouteCache() {
     watch(() => route.path, collectRouteCaches, { immediate: true });
   }
 
+  function refresh(componentName) {
+    render.value[componentName] = false;
+    nextTick(() => {
+      render.value[componentName] = true;
+    });
+  }
+
   return {
     caches,
     addCache,
     removeCache,
     collectCaches,
+    render,
+    refresh,
   };
 }
