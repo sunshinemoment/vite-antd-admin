@@ -2,17 +2,18 @@
 import { menuMap } from '@/config/menu';
 import { Loading3QuartersOutlined, CloseCircleOutlined } from '@ant-design/icons-vue';
 import useRouteCache from '@/hooks/useRouteCache';
+import { localStore } from '@/utils/store';
+
+const localTabs = localStore.get('page-tabs') || [];
 
 const { removeCache, refresh: refreshTab } = useRouteCache();
 const route = useRoute();
 const router = useRouter();
-const tabs = ref([]);
+const tabs = ref(localTabs);
 
 const activeKey = ref();
 
 function changeTabs() {
-  if (!route.meta?.keepAlive) return;
-
   const currentTab = tabs.value.find((tab) => tab.fullPath === route.fullPath);
 
   if (currentTab) {
@@ -32,7 +33,8 @@ function changeTabs() {
   }
 
   const tab = {
-    ...route,
+    fullPath: route.fullPath,
+    params: route.params,
     label: route.params.id || menuMap[route.name]?.title || route.fullPath,
     componentName,
   };
@@ -76,9 +78,12 @@ function remove(fullPath) {
   }
 
   const currentTab = tabs.value[index];
-  console.log(currentTab, 123);
   removeCache(currentTab.componentName);
   tabs.value.splice(index, 1);
+}
+
+function syncTabsWithLocal() {
+  localStore.set('page-tabs', tabs.value);
 }
 
 function tabChange(activeKey) {
@@ -87,6 +92,11 @@ function tabChange(activeKey) {
 
 watch(() => route.path, changeTabs, {
   immediate: true,
+});
+
+watch(() => tabs.value, syncTabsWithLocal, {
+  immediate: true,
+  deep: true,
 });
 </script>
 
