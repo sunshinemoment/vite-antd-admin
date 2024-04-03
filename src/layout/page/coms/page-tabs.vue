@@ -20,13 +20,21 @@ function changeTabs() {
     return;
   }
 
-  const routeMatch = route.matched[route.matched.length - 1];
-  const componentDef = routeMatch.components?.default;
+  let componentName;
+
+  if (Object.keys(route.params).length) {
+    /** 动态路由缓存 组件名称等于该链接地址 */
+    componentName = route.fullPath;
+  } else {
+    const routeMatch = route.matched[route.matched.length - 1];
+    const componentDef = routeMatch.components?.default;
+    componentName = componentDef?.name || route.name;
+  }
 
   const tab = {
     ...route,
     label: route.params.id || menuMap[route.name]?.title || route.fullPath,
-    componentName: componentDef?.name || route.name,
+    componentName,
   };
 
   activeKey.value = tab.fullPath;
@@ -68,6 +76,7 @@ function remove(fullPath) {
   }
 
   const currentTab = tabs.value[index];
+  console.log(currentTab, 123);
   removeCache(currentTab.componentName);
   tabs.value.splice(index, 1);
 }

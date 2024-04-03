@@ -4,6 +4,7 @@ import useRouteCache from '@/hooks/useRouteCache';
 
 const { caches, render: renderMap } = useRouteCache();
 
+// 避免getComponent每次生成新实例
 const cacheList = {};
 
 function getComponent(component) {
@@ -32,9 +33,9 @@ function getComponent(component) {
 </script>
 
 <template>
-  <router-view v-slot="{ Component }">
+  <router-view v-slot="{ Component, route }">
     <keep-alive :include="caches">
-      <component :is="getComponent(Component)" />
+      <component :is="getComponent(Component, route)" />
     </keep-alive>
   </router-view>
 </template>
