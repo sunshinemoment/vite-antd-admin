@@ -2,6 +2,7 @@
 import { menuMap } from '@/config/menu';
 import { Loading3QuartersOutlined, CloseCircleOutlined } from '@ant-design/icons-vue';
 import useRouteCache from '@/hooks/useRouteCache';
+import draggable from 'vuedraggable';
 import { localStore } from '@/utils/store';
 
 const localTabs = localStore.get('page-tabs') || [];
@@ -10,7 +11,6 @@ const { removeCache, refresh: refreshTab } = useRouteCache();
 const route = useRoute();
 const router = useRouter();
 const tabs = ref(localTabs);
-
 const activeKey = ref();
 
 function changeTabs() {
@@ -86,8 +86,9 @@ function syncTabsWithLocal() {
   localStore.set('page-tabs', tabs.value);
 }
 
-function tabChange(activeKey) {
-  router.push(activeKey);
+function tabChange(active) {
+  activeKey.value = active;
+  router.push(active);
 }
 
 watch(() => route.path, changeTabs, {
@@ -102,24 +103,35 @@ watch(() => tabs.value, syncTabsWithLocal, {
 
 <template>
   <div class="page-tabs">
-    <a-tabs v-model:activeKey="activeKey" type="card" @change="tabChange">
-      <a-tab-pane v-for="tab in tabs" :key="tab.fullPath">
-        <template #tab>
-          <div class="page-tab">
+    <draggable
+      v-model="tabs"
+      item-key="fullPath"
+      class="page-tabs-transtion"
+      :component-data="{ type: 'transtion-group' }"
+      :animation="500"
+    >
+      <template #item="{ element }">
+        <div
+          :key="element.fullPath"
+          class="page-tab"
+          :class="{ 'page-tab-active': activeKey === element.fullPath }"
+          @click="tabChange(element.fullPath)"
+        >
+          <div class="page-tab-inner">
             <Loading3QuartersOutlined
               class="page-tab__icon page-tab__refresh"
-              @click.stop="refresh(tab.fullPath)"
+              @click.stop="refresh(element.fullPath)"
             ></Loading3QuartersOutlined>
-            <span>{{ tab.label }}</span>
+            <span>{{ element.label }}</span>
             <CloseCircleOutlined
               v-if="tabs.length > 1"
               class="page-tab__icon page-tab__close"
-              @click.stop="remove(tab.fullPath)"
+              @click.stop="remove(element.fullPath)"
             ></CloseCircleOutlined>
           </div>
-        </template>
-      </a-tab-pane>
-    </a-tabs>
+        </div>
+      </template>
+    </draggable>
   </div>
 </template>
 
@@ -127,39 +139,57 @@ watch(() => tabs.value, syncTabsWithLocal, {
 .page-tabs {
   background: #fff;
 
-  :deep(.ant-tabs-top > .ant-tabs-nav) {
-    margin: 1px;
+  .page-tabs-transtion {
+    padding: 4px;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
-  :deep(.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab) {
-    opacity: 0.6;
-    .page-tab__refresh {
-      cursor: not-allowed;
+  .page-tab {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 14px;
+    border: 1px solid #cecece;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2;
+
+    &:not(.page-tab-active):hover {
+      color: #4876e6ad;
+    }
+
+    & + .page-tab {
+      margin-left: 4px;
     }
   }
 
-  :deep(.ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab-active) {
-    opacity: 1;
+  .page-tab-active {
+    color: #4876e6;
+    font-weight: 700;
     .page-tab__refresh {
       cursor: pointer;
     }
   }
-}
 
-.page-tab {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  justify-content: space-between;
-}
+  .page-tab-inner {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: space-between;
+  }
 
-.page-tab__icon {
-  opacity: 0.6;
-  margin: 0 !important;
-  transition: all 0.2s;
-  &:hover {
-    opacity: 1;
-    transform: scale(1.2);
+  .page-tab__icon {
+    opacity: 0.6;
+    margin: 0 !important;
+    transition: all 0.2s;
+    &:hover {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  .page-tab__refresh {
+    cursor: not-allowed;
   }
 }
 </style>
