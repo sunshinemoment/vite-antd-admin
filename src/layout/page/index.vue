@@ -44,8 +44,12 @@ collectCaches();
         <PageHeader @toggleCollapsed="collapsed = !collapsed" :collapsed="collapsed"></PageHeader>
       </a-layout-header>
       <a-layout-content class="layout-page__content">
-        <PageTabs></PageTabs>
-        <RouterViewKeepInclude></RouterViewKeepInclude>
+        <div class="layout-page__content-tabs">
+          <PageTabs></PageTabs>
+        </div>
+        <div class="layout-page__content-main">
+          <RouterViewKeepInclude></RouterViewKeepInclude>
+        </div>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -83,6 +87,12 @@ collectCaches();
 }
 
 .layout-page__content {
-  min-height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-page__content-main {
+  flex: auto;
 }
 </style>
