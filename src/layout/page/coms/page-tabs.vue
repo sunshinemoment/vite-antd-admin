@@ -138,34 +138,43 @@ watch(() => tabs.value, syncTabsWithLocal, {
 <style scoped lang="scss">
 .page-tabs {
   background: #fff;
-
+  
   .page-tabs-transtion {
-    padding: 4px;
-    overflow-x: auto;
-    white-space: nowrap;
+    padding: 8px 0 0 8px;
+    overflow: hidden;
   }
 
   .page-tab {
     display: inline-block;
     padding: 4px 8px;
+    margin-right: 4px;
     font-size: 14px;
     border: 1px solid #cecece;
     border-radius: 2px;
     cursor: pointer;
-    transition: all 0.2;
+    overflow: hidden;
 
     &:not(.page-tab-active):hover {
       color: #4876e6ad;
-    }
-
-    & + .page-tab {
-      margin-left: 4px;
     }
   }
 
   .page-tab-active {
     color: #4876e6;
-    font-weight: 700;
+    border-color: #4876e6;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: #4876e6;
+      left: -8px;
+      top: -8px;
+      transform: rotate(45deg);
+    }
+
     .page-tab__refresh {
       cursor: pointer;
     }
