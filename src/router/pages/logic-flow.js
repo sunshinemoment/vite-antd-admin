@@ -1,10 +1,12 @@
-import loadable from '@/utils/loadable';
 import * as ConstantRouteName from '@/constants/route-name';
+import customRouteWidthName from '@/utils/customRouteWidthName';
 
 const route = {
   path: 'logic-flow',
   name: ConstantRouteName.LOGIC_FLOW,
-  component: loadable(() => import(/* webpackChunkName: "logic-flow" */ '@/pages/logic-flow')),
+  component: customRouteWidthName(ConstantRouteName.LOGIC_FLOW, () =>
+    import(/* webpackChunkName: "logic-flow" */ '@/pages/logic-flow'),
+  ),
 };
 
 export default route;

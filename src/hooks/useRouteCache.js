@@ -4,6 +4,14 @@ const render = ref({});
 export default function useRouteCache() {
   const route = useRoute();
 
+  function addRender(componentName) {
+    if (Array.isArray(componentName)) {
+      componentName.forEach(addRender);
+      return;
+    }
+    render.value[componentName] = true;
+  }
+
   function addCache(componentName) {
     if (Array.isArray(componentName)) {
       componentName.forEach(addCache);
@@ -11,7 +19,6 @@ export default function useRouteCache() {
     }
     if (caches.value.includes(componentName)) return;
     caches.value.push(componentName);
-    render.value[componentName] = true;
   }
 
   function removeCache(componentName) {
@@ -30,6 +37,7 @@ export default function useRouteCache() {
     /** 动态路由缓存 */
     if (Object.keys(route.params).length && route.meta?.keepAlive) {
       addCache(route.fullPath);
+      addRender(route.fullPath);
     }
 
     route.matched.forEach((routeMatch) => {
@@ -39,6 +47,7 @@ export default function useRouteCache() {
       if (routeMatch.meta?.keepAlive) {
         addCache(componentName);
       }
+      addRender(componentName);
     });
   }
 
@@ -54,6 +63,7 @@ export default function useRouteCache() {
   }
 
   return {
+    addRender,
     caches,
     addCache,
     removeCache,

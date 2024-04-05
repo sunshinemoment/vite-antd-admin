@@ -138,7 +138,7 @@ watch(() => tabs.value, syncTabsWithLocal, {
 <style scoped lang="scss">
 .page-tabs {
   background: #fff;
-  
+
   .page-tabs-transtion {
     padding: 8px 0 0 8px;
     overflow: hidden;
@@ -156,6 +156,7 @@ watch(() => tabs.value, syncTabsWithLocal, {
 
     &:not(.page-tab-active):hover {
       color: #4876e6ad;
+      border-color: #4876e6ad;
     }
   }
 
