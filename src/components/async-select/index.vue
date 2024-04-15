@@ -12,6 +12,10 @@ const props = defineProps({
     type: Number,
     default: 50,
   },
+  lazy: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const val = ref(props.value);
@@ -31,6 +35,11 @@ const search = (value) => {
   complete.value = false;
   page.value = 1;
   keywords.value = value;
+  fetchList();
+};
+
+const focus = () => {
+  if (list.value.length) return;
   fetchList();
 };
 
@@ -76,7 +85,9 @@ const popupScroll = (e) => {
   }
 };
 
-fetchList();
+if (!props.lazy) {
+  fetchList();
+}
 </script>
 
 <template>
@@ -88,6 +99,7 @@ fetchList();
     :filter-option="false"
     @change="change"
     @search="search"
+    @focus="focus"
     @popupScroll="popupScroll"
   >
     <template v-if="fetching" #notFoundContent>
