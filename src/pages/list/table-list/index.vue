@@ -2,9 +2,11 @@
 import { useScreen } from 'vue-screen';
 import { Modal } from 'ant-design-vue';
 import usePaginator from '@/hooks/usePaginator';
+import AsyncSelect from '@/components/async-select';
 import Add from './add';
 import Detail from './detail';
 import { getList, deleteItem } from '@/apis/table-list';
+import { getList as getOptionList } from '@/apis/option';
 
 const columns = [
   {
@@ -38,6 +40,7 @@ const screen = useScreen();
 const formState = reactive({
   data1: '',
   data2: '',
+  data3: undefined,
 });
 const formRef = ref();
 const addRef = ref(null);
@@ -158,6 +161,9 @@ onMounted(() => {
       </a-form-item>
       <a-form-item label="选项二" name="data2">
         <a-input v-model:value="formState.data2" placeholder="请输入"></a-input>
+      </a-form-item>
+      <a-form-item label="异步选择单选" name="data2">
+        <AsyncSelect v-model:value="formState.data3" :getData="getOptionList"></AsyncSelect>
       </a-form-item>
       <a-form-item>
         <a-space>

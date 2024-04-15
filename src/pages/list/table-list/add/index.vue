@@ -10,7 +10,7 @@ const defaultFormState = {
 };
 
 const emits = defineEmits(['addSuccess', 'updateSuccess']);
-const visible = ref(false);
+const open = ref(false);
 const current = ref(null);
 const formState = reactive({ ...defaultFormState });
 const formRef = ref();
@@ -47,7 +47,7 @@ const submitForm = () => {
         message.success('添加成功');
         emits('addSuccess');
       }
-      visible.value = false;
+      open.value = false;
     })
     .catch((error) => {
       console.log('error', error);
@@ -60,7 +60,7 @@ const afterClose = () => {
 };
 
 async function show(data) {
-  visible.value = true;
+  open.value = true;
   if (data) {
     current.value = data;
     formState.name = data.name;
@@ -70,7 +70,7 @@ async function show(data) {
 }
 
 function hide() {
-  visible.value = false;
+  open.value = false;
 }
 
 defineExpose({
@@ -81,7 +81,7 @@ defineExpose({
 
 <template>
   <a-modal
-    v-model:visible="visible"
+    v-model:open="open"
     :title="current ? `【${current.name}】编辑` : '添加'"
     :ok-text="current ? '编辑' : '添加'"
     cancel-text="取消"
