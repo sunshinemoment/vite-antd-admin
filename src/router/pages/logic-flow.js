@@ -7,6 +7,9 @@ const route = {
   component: customRouteWidthName(ConstantRouteName.LOGIC_FLOW, () =>
     import(/* webpackChunkName: "logic-flow" */ '@/pages/logic-flow'),
   ),
+  meta: {
+    keepAlive: true,
+  },
 };
 
 export default route;
