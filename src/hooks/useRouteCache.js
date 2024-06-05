@@ -1,5 +1,6 @@
 const caches = ref([]);
 const render = ref({});
+const mounted = ref({});
 
 export default function useRouteCache() {
   const route = useRoute();
@@ -62,6 +63,14 @@ export default function useRouteCache() {
     });
   }
 
+  function addMounted(key) {
+    mounted.value[key] = true;
+  }
+
+  function removeMounted(key) {
+    mounted.value[key] = false;
+  }
+
   return {
     addRender,
     caches,
@@ -70,5 +79,8 @@ export default function useRouteCache() {
     collectCaches,
     render,
     refresh,
+    mounted,
+    addMounted,
+    removeMounted,
   };
 }

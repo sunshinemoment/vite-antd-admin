@@ -7,7 +7,7 @@ import { localStore } from '@/utils/store';
 
 const localTabs = localStore.get('page-tabs') || [];
 
-const { removeCache, refresh: refreshTab } = useRouteCache();
+const { removeCache, removeMounted, refresh: refreshTab } = useRouteCache();
 const route = useRoute();
 const router = useRouter();
 const tabs = ref(localTabs);
@@ -79,6 +79,7 @@ function remove(fullPath) {
 
   const currentTab = tabs.value[index];
   removeCache(currentTab.componentName);
+  removeMounted(currentTab.componentName);
   tabs.value.splice(index, 1);
 }
 
